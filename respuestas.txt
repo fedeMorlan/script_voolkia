@@ -1,0 +1,32 @@
+EJERCICIO SQL:
+
+SELECT c.CarrierID, ca.Zona, SUM(ca.Cantidad de envíos * co.Costo) as CostoTotalMes1
+FROM Carrier c INNER JOIN  COSTOS co ON c.CarrierID=co.CarrierID  INNER JOIN cantidad de envíos ca ON ca.Zona=co.Zona
+WHERE ca.Mes=1
+GROUP BY c.CarrierID, ca.Zona
+
+
+no comprendo a qué se refiere con qué propuesta haría yo.
+
+
+EJERCICIO GRAILS: no conozco grails. escribo lo que interpreto que podría ser: imprimir en pantalla por cada Servicio obtenido del id 27528954729, el nombre de sucursal, la fecha y la descripción
+
+EJERCICIO BASH:
+  Como output: imprime, para cada usuario de la lista de users_id, "numero de id de usuario:numero de servicio"; una linea por cada servicio que tenga ese usuario
+
+linea a linea:
+
+#!/bin/bash
+# declara un arreglo con todos los users_id para usar
+users_id=(71665538 66146765 132961968 15096445 172753273 54152646) 
+# iteracion por cada elemento del arreglo declarado
+for users_id in ${users_id[*]}
+do
+# guardar en una variable todos los valores del campo "services" del json de mercadolibre
+curl=$(curl -s "​api.mercadolibre.com/users/$users_id/shipping_preferences​" | jq -c
+'.services')
+# imprimir en pantalla el user id y el numero de servicio guardado en el paso anterior
+echo "$users_id: $curl"
+done
+
+Cuantas lineas se imprimen como output?  se imprime tantas lineas como servicios tengan en total todos los usuarios del arreglo
